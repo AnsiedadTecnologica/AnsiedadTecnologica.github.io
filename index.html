@@ -17,6 +17,8 @@
         <meta name="theme-color"content="#09f">
         <link rel="icon" type="Imagenes/jpg" href="Imagenes/IconoDePestaña.png">
 
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
     </head>
     
 <body>
@@ -35,6 +37,7 @@
             <li class="causa-selected"><a href="#Causas de ansiedad por la tecnologia" > Causas</a></li>
             <li class="efecto-selected"><a href="#Efectos de la ansiedad por la tecnologia">Efectos</a></li>
             <li class="recurso-selected"><a href="#Recursos" >Recursos </a> </li>
+            <li class="ChatBot-selected"><a href="#ChatBot" >ChatBot </a> </li>
             <li class="comentario-selected"><a href="#disqus_thread" >Comentarios </a> </li>
         </ul>
         </nav>
@@ -187,8 +190,8 @@
         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <br>
        <!--NO TOCAR ESTO-->
-        <article class="ChatBot">
-            <h1 class="Titulo">Chat por turnos con Google Gemini</h1>
+        <article class="ChatBot" id="ChatBot">
+            <h1 class="Titulo">ChatBot</h1>
             <div id="chatbox"></div>
             <div class="input-area">
                 <input type="text" id="inputText" placeholder="Escribe tu mensaje...">
@@ -204,7 +207,7 @@
             <script type="module">
                 import { GoogleGenerativeAI } from "@google/generative-ai";
         
-                const API_KEY = "AIzaSyAIESM34Oi9TUpzZ0-OdKBgZF985FziLoQ"; // Reemplaza con tu API KEY
+                const API_KEY = "AIzaSyCEFiiEdJkdvojcEWGIdluPzJtH1RmxJyw"; // Reemplaza con tu API KEY
                 const genAI = new GoogleGenerativeAI(API_KEY);
                 const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
                 const chatbox = document.getElementById('chatbox');
