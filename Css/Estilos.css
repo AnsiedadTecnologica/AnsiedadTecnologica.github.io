@@ -49,7 +49,16 @@ header{
     align-items: center;
     position: relative;
 }
-.menu-selected:before{
+.menu-selected:hover:before{
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: #46a2fd;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.introduccion-selected:hover:before{
     content: '';
     width: 100%;
     height: 4px;
@@ -66,6 +75,7 @@ header{
     position: absolute;
     top: 0;
     left: 0;
+    
 }
 .efecto-selected:hover:before{
     content: '';
@@ -75,6 +85,7 @@ header{
     position: absolute;
     top: 0;
     left: 0;
+    
 }
 .recurso-selected:hover:before{
     content: '';
@@ -84,6 +95,7 @@ header{
     position: absolute;
     top: 0;
     left: 0;
+    
 }
 .ChatBot-selected:hover:before{
     content: '';
@@ -93,27 +105,16 @@ header{
     position: absolute;
     top: 0;
     left: 0;
+    
 }
-.comentario-selected:hover:before{
-    content: '';
-    width: 100%;
-    height: 4px;
-    background: #46a2fd;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+
 .menu nav ul li a{
     color: #777777;
     font-size: 18px;
     transition: color 300ms;
 }
-
 .menu nav ul li a:hover{
     color:  #46a2fd;
-}
-.menu .text-menu-selected{
-    color: #46a2fd;
 }
 
 
@@ -160,7 +161,14 @@ header{
     font-size: 29px;
     font-weight: 300;
 }
-
+.container-content-Causas{
+    width: 1200px;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    
+}
 .container-content{
     width: 1200px;
     margin: auto;
@@ -199,8 +207,9 @@ article p{
     margin-bottom: 0;
 }
 article img{
-    width: 100%;
+    width: 80%;
     margin-top: 20px;
+    
 }
 .container-aside aside{
     width: 320px;
@@ -247,17 +256,24 @@ body
 
 /*CHATBOT*/
 /* Estilos del chatbot */
+.container-content-ChatBot{
+    width: 90%;
+    margin: auto;
+    margin-top: 6%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Rubik', sans-serif ;
+}
 .ChatBot {
-    font-family: 'Rubik', sans-serif !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 70vh;
     background-color: #ffffff;
 }
 
-.ChatBot .container {
+.ChatBot.container {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -277,8 +293,8 @@ body
     background-color: #DDE6F0;
     border-radius: 5px;
     padding: 10px;
-    height: 300px;
-    width: 700px;
+    height: 370px;
+    width: 90%;
     overflow-y: auto;
     margin-bottom: 10px;
     display: flex;
@@ -301,7 +317,7 @@ body
 }
 
 .ChatBot .assistant {
-    background-color: #f1f0f0;
+    background-color: #ffffff;
     color: #333;
     align-self: flex-start;
 }
@@ -309,7 +325,7 @@ body
 /* Estilos del input y botón */
 .ChatBot .input-area {
     display: flex;
-    width: 100%;
+    width: 90%;
 }
 
 .ChatBot #inputText {
@@ -365,4 +381,12 @@ opacity: 0;
     padding: 20px; /* Espacio interior */
     border-radius: 10px; /* Bordes redondeados */
     margin-top: 20px; /* Espacio superior */
+}
+
+
+footer
+{
+    background-color: rgba(3, 255, 45, 0.30);
+    padding: 1rem 2rem;
+    text-align: right; 
 }

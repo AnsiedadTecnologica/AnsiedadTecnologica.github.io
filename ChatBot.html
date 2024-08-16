@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <!--Head es para darle info a la pagina, algo que no se renderiza-->
+    <head>
+        <meta charset="utf-8"> <!--Codificacion-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Adapta el contenido al tamaño de la pantalla el dispositivo-->
+
+        <meta name="robots"content="index, follow"> <!--Indexar pagina y seguir enlaces-->
+
+        <title>Ansiedad Tecnológica</title> <!--Titulo de la pestaña-->
+        <link rel="stylesheet" href="Css/Estilos.css">
+        <meta name="description" content="AnsiedadTecnologica">
+
+        <meta property="og:title" content="AnsiedadTecnologica">
+        <meta property="og:description" content="Ansiedad Tecnologica">
+
+        <meta name="theme-color"content="#09f">
+        <link rel="icon" type="Imagenes/jpg" href="Imagenes/IconoDePestaña.png">
+
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+    </head>
+    
+<body>
+
+    <!--Header menu El h1, h2, h3, etc se usan para Titulos con diferentes tamaño dependiendo de cada etiqueta -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>Ansiedad <b>Tecnológica</b></h1>
+            </div> 
+    <div class="menu">
+        <nav>
+        <ul>
+            <li class="menu-selected"><a href= "index.html" >Inicio</a></li>
+            <li class="introduccion-selected"><a href="Introduccion.html" > Introduccion</a></li>
+            <li class="causa-selected"><a href="Causas.html" > Causas</a></li>
+            <li class="efecto-selected"><a href="Efectos.html">Efectos</a></li>
+            <li class="recurso-selected"><a href="Recursos.html" >Recursos </a> </li>
+            <li class="ChatBot-selected"><a href="ChatBot.html" >ChatBot </a> </li>
+        </ul>
+        </nav>
+            </div>
+        </div>  
+        </header>
+
+    <div class="container-content-ChatBot">
+    <!--NO TOCAR ESTO-->
+     <article class="ChatBot" id="ChatBot">
+         <h1 class="Titulo">ChatBot</h1>
+         <div id="chatbox"></div>
+         <div class="input-area">
+             <input type="text" id="inputText" placeholder="Escribe tu mensaje...">
+             <button id="sendMessage">Enviar</button>
+         </div>
+         <script type="importmap">
+             {
+                 "imports": {
+                     "@google/generative-ai": "https://esm.run/@google/generative-ai"
+                 }
+             }
+         </script>
+         <script type="module">
+             import { GoogleGenerativeAI } from "@google/generative-ai";
+     
+             const API_KEY = "AIzaSyCEFiiEdJkdvojcEWGIdluPzJtH1RmxJyw"; // Reemplaza con tu API KEY
+             const genAI = new GoogleGenerativeAI(API_KEY);
+             const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+             const chatbox = document.getElementById('chatbox');
+             let conversationHistory = '';
+     
+             document.getElementById('sendMessage').addEventListener('click', async () => {
+                 const userInput = document.getElementById('inputText').value;
+                 displayMessage(userInput, 'user');
+     
+                 conversationHistory += `Usuario: ${userInput}\n`;
+                 const prompt = conversationHistory + "Asistente:";
+     
+                 try {
+                     const result = await model.generateContent(prompt);
+                     const responseText = await result.response.text();
+                     const assistantResponse = responseText.replace("Asistente:", "").trim();
+     
+                     conversationHistory += `${assistantResponse}\n`;
+                     displayMessage(assistantResponse, 'assistant');
+                 } catch (error) {
+                     console.error('Error al generar contenido:', error);
+                     displayMessage('Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo.', 'assistant');
+                 }
+             });
+     
+             function displayMessage(message, role) {
+                 const messageElement = document.createElement('p');
+                 messageElement.classList.add(role);
+                 messageElement.textContent = message;
+                 chatbox.appendChild(messageElement);
+                 chatbox.scrollTop = chatbox.scrollHeight;
+             }
+         </script>
+     </article>
+    </div>
+<!--Seccion de comentarios-->
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ansiedadtecnologica.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<footer>
+    Universidad Técnica Estatal de Quevedo
+</footer>
+</body>
+</html>
