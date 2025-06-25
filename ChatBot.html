@@ -69,7 +69,7 @@
             });
             
             const model = genAI.getGenerativeModel({ 
-                model: "gemini-1.0-pro",  // Modelo más estable
+                model: "gemini-1.0-pro",  // Modelo exacto
                 generationConfig: {
                     temperature: 0.9,
                     topP: 1,
@@ -104,7 +104,9 @@
                 displayMessage(userInput, 'user');
                 
                 // Mostrar indicador de "escribiendo"
-                const typingIndicator = showTypingIndicator();
+                const typingId = "typing-" + Date.now();
+                chatbox.innerHTML += `<div id="${typingId}" class="typing-indicator"><span>.</span><span>.</span><span>.</span></div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
                 
                 isWaitingForResponse = true;
                 sendButton.disabled = true;
@@ -112,35 +114,27 @@
                 try {
                     const result = await model.generateContent(userInput);
                     const response = await result.response;
+                    const text = await response.text();
                     
-                    if (!response || !response.text) {
-                        throw new Error("La API no devolvió una respuesta válida");
-                    }
+                    // Eliminar indicador y mostrar respuesta
+                    const indicator = document.getElementById(typingId);
+                    if (indicator) indicator.remove();
                     
-                    const responseText = await response.text();
-                    displayMessage(responseText, 'assistant');
+                    displayMessage(text, 'assistant');
                 } catch (error) {
-                    console.error('Error completo:', error);
-                    displayMessage(`Error: ${error.message.split('.')[0] || "Fallo al conectar con la API"}`, 'assistant');
+                    console.error('Error:', error);
+                    const indicator = document.getElementById(typingId);
+                    if (indicator) indicator.remove();
+                    displayMessage("Error: Intenta recargar la página", 'assistant');
                 } finally {
-                    chatbox.removeChild(typingIndicator);
                     isWaitingForResponse = false;
                     sendButton.disabled = false;
                 }
             }
             
-            function showTypingIndicator() {
-                const indicator = document.createElement('div');
-                indicator.classList.add('typing-indicator');
-                indicator.innerHTML = '<span>.</span><span>.</span><span>.</span>';
-                chatbox.appendChild(indicator);
-                chatbox.scrollTop = chatbox.scrollHeight;
-                return indicator;
-            }
-            
             function displayMessage(message, role) {
                 const messageElement = document.createElement('p');
-                messageElement.classList.add(role);
+                messageElement.className = role;
                 messageElement.textContent = message;
                 chatbox.appendChild(messageElement);
                 chatbox.scrollTop = chatbox.scrollHeight;
@@ -148,7 +142,9 @@
         </script>
     </article>
 </div>
-    
+
+
+
 <!--Seccion de comentarios-->
 <div id="disqus_thread"></div>
 <script>
