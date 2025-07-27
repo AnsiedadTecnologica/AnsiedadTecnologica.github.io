@@ -52,6 +52,38 @@
         </div>
     </div>
 
+    <!-- Efecto Matrix (HTML) -->
+    <div class="matrix-effect" id="matrixEffect"></div>
+
+    <!-- JavaScript integrado directamente -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const matrixContainer = document.getElementById('matrixEffect');
+            const characters = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+            
+            // Calcular cuántas columnas necesitamos
+            const columnCount = Math.floor(window.innerWidth / 20);
+            
+            // Crear columnas
+            for (let i = 0; i < columnCount; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = (i * 20) + 'px';
+                column.style.animationDuration = (3 + Math.random() * 10) + 's';
+                column.style.animationDelay = (Math.random() * 5) + 's';
+                
+                // Crear caracteres para la columna
+                let content = '';
+                const charCount = 30 + Math.floor(Math.random() * 20);
+                for (let j = 0; j < charCount; j++) {
+                    content += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                
+                column.textContent = content;
+                matrixContainer.appendChild(column);
+            }
+        });
+    </script>
 
 </body>
 
